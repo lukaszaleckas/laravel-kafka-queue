@@ -1,0 +1,31 @@
+version: "3.5"
+
+services:
+  php:
+    build: .
+    tty: true
+    links:
+      - kafka
+    volumes:
+      - ./:/app:cached
+
+  zookeeper:
+    image: bitnami/zookeeper
+    volumes:
+      - ./.data/zookeper:/bitnami
+    ports:
+      - 2181:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    image: bitnami/kafka
+    volumes:
+      - ./.data/kafka:/bitnami
+    ports:
+      - "9092:9092"
+    links:
+      - zookeeper
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
