@@ -2,12 +2,12 @@
 
 Laravel Kafka queue driver with support for delayed jobs.
 
-# Installation
+## Installation
 
 Just run:
 
 ```
-composer install lukaszaleckas/laravel-kafka-queue
+composer require lukaszaleckas/laravel-kafka-queue
 ```
 
 Service provider should be automatically registered, if not add
